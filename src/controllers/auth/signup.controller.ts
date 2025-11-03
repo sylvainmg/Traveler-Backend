@@ -30,6 +30,7 @@ export async function signup(req: Request, res: Response) {
 
     res.json({
         message: "User added.",
+        id: userId,
         accessToken,
         refreshToken,
     });

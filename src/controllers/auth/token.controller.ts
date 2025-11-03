@@ -29,7 +29,9 @@ export async function token(req: Request, res: Response) {
             const accessToken = generateAccessToken({
                 id: (user as any).id,
             });
-            res.json({ accessToken });
+
+            const id = (rows[0] as any).ID_CLIENT;
+            res.json({ accessToken, id });
         }
     );
 }

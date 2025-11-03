@@ -29,6 +29,7 @@ export async function login(req: Request, res: Response) {
 
         res.status(200).json({
             message: "Login successful.",
+            id: user.ID_CLIENT,
             accessToken,
             refreshToken,
         });

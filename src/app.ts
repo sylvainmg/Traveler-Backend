@@ -11,6 +11,9 @@ import {
     verifyAdminAccessToken,
 } from "./middlewares/accessToken.middleware.ts";
 import rootRoute from "./routes/root.route.ts";
+import publicBookingRoutes from "./routes/public/booking.route.ts";
+import publicHotelsRoutes from "./routes/public/hotels.route.ts";
+import publicAirlinesRoutes from "./routes/public/airline.route.ts";
 
 const app = express();
 
@@ -22,12 +25,17 @@ app.use(express.json());
 app.use("/admin/auth", adminsRoutes); // admin
 app.use("/auth", authRoutes); // client
 
+// admins routes
 app.use("/admin/", verifyAdminAccessToken, rootRoute);
 app.use("/admin/clients", verifyAdminAccessToken, clientsRoutes);
 app.use("/admin/airlines", verifyAdminAccessToken, airlinesRoutes);
 app.use("/admin/hotels", verifyAdminAccessToken, hotelsRoutes);
 app.use("/admin/bookings", verifyAdminAccessToken, bookingsRoutes);
-app.use("/admin/bookings", verifyAdminAccessToken, bookingsRoutes);
+
+// clients routes
+app.use("/bookings", verifyAccessToken, publicBookingRoutes);
+app.use("/hotels", verifyAccessToken, publicHotelsRoutes);
+app.use("/airlines", verifyAccessToken, publicAirlinesRoutes);
 
 app.get("/root", verifyAccessToken, (req, res) =>
     res.json({ message: "Welcome, peasant." })
