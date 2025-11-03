@@ -14,6 +14,7 @@ import rootRoute from "./routes/root.route.ts";
 import publicBookingRoutes from "./routes/public/booking.route.ts";
 import publicHotelsRoutes from "./routes/public/hotels.route.ts";
 import publicAirlinesRoutes from "./routes/public/airline.route.ts";
+import publicRatingRoute from "./routes/public/rating.route.ts";
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use("/admin/bookings", verifyAdminAccessToken, bookingsRoutes);
 app.use("/bookings", verifyAccessToken, publicBookingRoutes);
 app.use("/hotels", verifyAccessToken, publicHotelsRoutes);
 app.use("/airlines", verifyAccessToken, publicAirlinesRoutes);
+app.use("/rating", verifyAccessToken, publicRatingRoute);
 
 app.get("/root", verifyAccessToken, (req, res) =>
     res.json({ message: "Welcome, peasant." })
