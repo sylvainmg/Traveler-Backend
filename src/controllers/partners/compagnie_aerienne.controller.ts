@@ -99,7 +99,7 @@ export async function getTopAirlines(req: Request, res: Response) {
 export async function getAirlinesRating(req: Request, res: Response) {
     const { id } = req.body as { id: number };
     let query = `
-    select ca.id_compagnie_aerienne, e.note_compagnie_aerienne_aller, e.avis_compagnie_aerienne_aller, e.note_compagnie_aerienne_retour,
+    select r.num_reservation, ca.id_compagnie_aerienne, e.note_compagnie_aerienne_aller, e.avis_compagnie_aerienne_aller, e.note_compagnie_aerienne_retour,
     avis_compagnie_aerienne_retour
     from evaluation e
     join reservation r on r.num_reservation = e.num_reservation

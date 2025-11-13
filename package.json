@@ -17,15 +17,21 @@
         "@types/cookie-parser": "^1.4.10",
         "@types/cors": "^2.8.19",
         "@types/multer": "^2.0.0",
+        "@types/nodemailer": "^7.0.3",
+        "axios": "^1.13.1",
         "bcryptjs": "^3.0.2",
         "cookie-parser": "^1.4.7",
         "cors": "^2.8.5",
         "dotenv": "^17.2.3",
         "express": "^5.1.0",
+        "images-scraper": "^7.0.0",
         "jsonwebtoken": "^9.0.2",
         "multer": "^2.0.2",
         "mysql2": "^3.15.3",
-        "nodemon": "^3.1.10"
+        "node-fetch": "^3.3.2",
+        "nodemailer": "^7.0.10",
+        "nodemon": "^3.1.10",
+        "puppeteer": "^24.28.0"
     },
     "devDependencies": {
         "@types/bcrypt": "^6.0.0",

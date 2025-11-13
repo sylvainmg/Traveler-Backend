@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { db } from "../../../config/db.ts";
 import { RowDataPacket } from "mysql2";
+import mailer from "../../utils/mailer.ts";
 
 interface Booking {
     pays_arrivee: string;
@@ -127,7 +128,7 @@ export async function createBooking(req: Request, res: Response) {
             (fin_sejour.getTime() - debut_sejour.getTime()) /
             (1000 * 60 * 60 * 24);
 
-        await db.query(query, [
+        const [result] = await db.query(query, [
             num_vol,
             num_vol_retourner,
             num_chambre,
@@ -138,6 +139,83 @@ export async function createBooking(req: Request, res: Response) {
             debut_sejour.toISOString().split("T")[0],
             duree_sejour,
         ]);
+
+        /* E-mail */
+        /* ********************************************************************************************* */
+
+        const query_bookings = `
+        select c.email, c.nom, c.prenom, ca.libelle categorie, p1.nom pays_depart, p2.nom destination, h.nom hotel, h.nb_etoile, pa.nom pays, pa.ville, ca1.nom compagnie_aerienne_aller,
+        v1.num_vol num_vol_aller, v1.prix prix_aller, v1.heure_depart heure_depart, ca2.nom compagnie_aerienne_retour, v2.num_vol num_vol_retour, 
+        v2.prix prix_retour, v2.heure_depart heure_retour, ch.categorie categorie_chambre, ch.prix prix_chambre,
+        r.debut_sejour, r.duree_sejour, v1.prix + v2.prix + r.duree_sejour * ch.prix total
+        from reservation r
+        join categorie ca on ca.code = r.code
+        join client c on c.id_client = r.id_client
+        join vol v1 on v1.num_vol = r.num_vol
+        join vol v2 on v2.num_vol = r.num_vol_retourner
+        join compagnie_aerienne ca1 on ca1.id_compagnie_aerienne = v1.id_compagnie_aerienne
+        join compagnie_aerienne ca2 on ca2.id_compagnie_aerienne = v2.id_compagnie_aerienne
+        join hotel h on h.id_hotel = r.id_hotel
+        join chambre ch on ch.num_chambre = r.num_chambre
+        join pays p1 on p1.code = v1.code_decoller
+        join pays p2 on p2.code = v2.code 
+        join pays pa on pa.code = h.code
+        where r.id_client = ? and r.num_reservation = ?
+        `;
+        const [reservations] = await db.query<RowDataPacket[]>(query_bookings, [
+            id_client,
+            (result as any).insertId,
+        ]);
+
+        const formatDate = (date: Date) => {
+            return `${date.getFullYear()}-${String(
+                date.getMonth() + 1
+            ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+        };
+
+        const addDays = (date: Date, n: number) =>
+            new Date(date.getTime() + n * 1000 * 60 * 60 * 24);
+
+        mailer(
+            reservations[0].email,
+            `${reservations[0].nom} ${reservations[0].prenom}`,
+            (result as any).insertId,
+            reservations[0].destination,
+            formatDate(reservations[0].debut_sejour),
+            formatDate(
+                addDays(
+                    new Date(reservations[0].debut_sejour),
+                    reservations[0].duree_sejour
+                )
+            ),
+            reservations[0].categorie,
+            reservations[0].num_vol_aller,
+            reservations[0].pays_depart,
+            reservations[0].destination,
+            reservations[0].heure_depart,
+            reservations[0].num_vol_retour,
+            reservations[0].destination,
+            reservations[0].pays_depart,
+            reservations[0].heure_retour,
+            reservations[0].hotel,
+            `${reservations[0].nb_etoile} ${
+                reservations[0].nb_etoile > 1 ? "étoiles" : "étoile"
+            }`,
+            `${reservations[0].ville}, ${reservations[0].pays}`,
+            reservations[0].categorie_chambre,
+            reservations[0].duree_sejour,
+            (
+                Number(reservations[0].prix_aller) +
+                Number(reservations[0].prix_retour)
+            ).toLocaleString(),
+            (
+                Number(reservations[0].prix_chambre) *
+                Number(reservations[0].duree_sejour)
+            ).toLocaleString(),
+            Number(reservations[0].total).toLocaleString()
+        );
+
+        /* ********************************************************************************************* */
 
         res.status(200).json({ message: "Booking successfully added." });
     } catch (err) {

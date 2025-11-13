@@ -15,3 +15,5 @@ export async function root(req: Request, res: Response) {
         admin,
     });
 }
+
+export default root;

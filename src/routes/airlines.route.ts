@@ -7,6 +7,7 @@ import {
     getTopDestinations,
     updateAirline,
 } from "../controllers/partners/compagnie_aerienne.controller.ts";
+import addAirline from "../controllers/partners/addAirline.controller.ts";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.get("/", getAirlinesNumber);
 router.get("/topDest", getTopDestinations);
 router.get("/topAir", getTopAirlines);
 router.post("/rating", getAirlinesRating);
+router.post("/add", addAirline);
 
 export default router;

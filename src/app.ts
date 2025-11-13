@@ -1,47 +1,16 @@
 import express from "express";
 import cors from "cors";
-import authRoutes from "./routes/auth.route.ts";
-import clientsRoutes from "./routes/clients.route.ts";
-import airlinesRoutes from "./routes/airlines.route.ts";
-import hotelsRoutes from "./routes/hotels.route.ts";
-import adminsRoutes from "./routes/admin.route.ts";
-import bookingsRoutes from "./routes/bookings.route.ts";
-import {
-    verifyAccessToken,
-    verifyAdminAccessToken,
-} from "./middlewares/accessToken.middleware.ts";
-import rootRoute from "./routes/root.route.ts";
-import publicBookingRoutes from "./routes/public/booking.route.ts";
-import publicHotelsRoutes from "./routes/public/hotels.route.ts";
-import publicAirlinesRoutes from "./routes/public/airline.route.ts";
-import publicRatingRoute from "./routes/public/rating.route.ts";
+import routes from "./routes/routes.ts";
 
 const app = express();
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
-// Auths
-app.use("/admin/auth", adminsRoutes); // admin
-app.use("/auth", authRoutes); // client
-
-// admins routes
-app.use("/admin/", verifyAdminAccessToken, rootRoute);
-app.use("/admin/clients", verifyAdminAccessToken, clientsRoutes);
-app.use("/admin/airlines", verifyAdminAccessToken, airlinesRoutes);
-app.use("/admin/hotels", verifyAdminAccessToken, hotelsRoutes);
-app.use("/admin/bookings", verifyAdminAccessToken, bookingsRoutes);
-
-// clients routes
-app.use("/bookings", verifyAccessToken, publicBookingRoutes);
-app.use("/hotels", verifyAccessToken, publicHotelsRoutes);
-app.use("/airlines", verifyAccessToken, publicAirlinesRoutes);
-app.use("/rating", verifyAccessToken, publicRatingRoute);
-
-app.get("/root", verifyAccessToken, (req, res) =>
-    res.json({ message: "Welcome, peasant." })
-);
+// Routes
+app.use(routes);
 
 // Serveur
 const PORT = process.env.PORT;

@@ -22,8 +22,9 @@ export async function getHotels(req: Request, res: Response) {
     }
 
     let query = `
-    select ch.num_convention, h.id_hotel, h.nom, ch.date_convention  
+    select ch.num_convention, h.id_hotel, h.nom, ch.date_convention, d.disponibilite
     from hotel h
+    join disponibilite d on d.code = h.code_avoir
     join convention_hotel ch on ch.id_hotel = h.id_hotel
     `;
 
@@ -83,7 +84,7 @@ export async function getTopHotels(req: Request, res: Response) {
 export async function getHotelsRating(req: Request, res: Response) {
     const { id } = req.body as { id: number };
     let query = `
-    select h.id_hotel, e.note_hotel, e.avis_hotel
+    select r.num_reservation, h.id_hotel, e.note_hotel, e.avis_hotel
     from evaluation e
     join reservation r on e.num_reservation = r.num_reservation
     join hotel h on h.id_hotel = r.id_hotel 

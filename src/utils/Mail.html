@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de réservation</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #fff;">
+
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f7f3f3; padding: 40px 0;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" border="0"
+                    style="background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+
+                    <tr>
+                        <td style="background: rgb(18, 140, 240); padding: 40px 30px; text-align: center;">
+                            <img src="https://unfraternal-unrescuable-sienna.ngrok-free.dev/traveler.png"
+                                alt="Traveler Logo" width="150" style="display: block; margin: 0 auto 20px auto;">
+                            <p style="margin: 10px 0 0 0; color: #ffffff; font-size: 16px; opacity: 0.9;">Votre voyage
+                                commence ici</p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="padding: 40px 30px; text-align: center; background-color: #f8f9fa;">
+                            <div
+                                style="display: inline-block; background-color: #10b981; color: #ffffff; padding: 20px 20px; border-radius: 40px; font-size: 14px; font-weight: bold; margin-bottom: 20px;">
+                                ✓ RÉSERVATION CONFIRMÉE
+                            </div>
+                            <h2 style="margin: 20px 0 10px 0; color: #1f2937; font-size: 24px;">Bonjour ${CLIENT_NOM} !
+                            </h2>
+                            <p style="margin: 0; color: #6b7280; font-size: 16px; line-height: 1.6;">
+                                Votre réservation a été confirmée avec succès. Nous sommes ravis de vous accompagner
+                                dans votre voyage.
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 0 30px 30px 30px;">
+
+                            <!-- Numéro de la réservation -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                                style="background-color: #b9cce5; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <p
+                                            style="margin: 0 0 5px 0; color: #1f2937; font-size: 13px; text-decoration: underline; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                                            Numéro de la réservation :</p>
+                                        <p
+                                            style="margin: 0; color: #1e40af; font-size: 24px; font-weight: bold; font-family: 'Courier New', monospace;">
+                                            ${NUMERO_RESERVATION}</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Informations du voyage -->
+                            <h3
+                                style="margin: 30px 0 15px 0; color: #1f2937; font-size: 18px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                                Informations du voyage
+                            </h3>
+
+                            <table width="100%" cellpadding="10" cellspacing="0" border="0"
+                                style="margin-bottom: 20px;">
+                                <tr>
+                                    <td
+                                        style="padding: 15px; background-color: #f9fafb; border-left: 4px solid #667eea;">
+                                        <p
+                                            style="margin: 0 0 5px 0; color: #6b7280; font-size: 12px; font-weight: bold;">
+                                            DESTINATION</p>
+                                        <p style="margin: 0; color: #1f2937; font-size: 16px; font-weight: bold;">
+                                            ${DESTINATION}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="padding: 15px; background-color: #f9fafb; border-left: 4px solid #15b163;">
+                                        <p
+                                            style="margin: 0 0 5px 0; color: #6b7280; font-size: 12px; font-weight: bold;">
+                                            DATE DE DÉPART</p>
+                                        <p style="margin: 0; color: #1f2937; font-size: 16px; font-weight: bold;">
+                                            ${DATE_DEPART}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="padding: 15px; background-color: #f9fafb; border-left: 4px solid #ef4444;">
+                                        <p
+                                            style="margin: 0 0 5px 0; color: #6b7280; font-size: 12px; font-weight: bold;">
+                                            DATE DE RETOUR</p>
+                                        <p style="margin: 0; color: #1f2937; font-size: 16px; font-weight: bold;">
+                                            ${DATE_RETOUR}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="padding: 15px; background-color: #f9fafb; border-left: 4px solid #8b5cf6;">
+                                        <p
+                                            style="margin: 0 0 5px 0; color: #6b7280; font-size: 12px; font-weight: bold;">
+                                            TYPE DE VOYAGE</p>
+                                        <p style="margin: 0; color: #1f2937; font-size: 16px; font-weight: bold;">
+                                            ${TYPE_VOYAGE}</p>
+                                        <!-- Genre le type de voyage c'est le truc de en groupe ou individuel -->
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!--  Vol -->
+                            <h3
+                                style="margin: 30px 0 15px 0; color: #1f2937; font-size: 18px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                                Détails du vol
+                            </h3>
+
+                            <table width="100%" cellpadding="15" cellspacing="0" border="0"
+                                style="background-color: #f0f9ff; border-radius: 8px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td width="50%" style="vertical-align: top; padding-right: 10px;">
+                                                    <p
+                                                        style="margin: 0 0 5px 0; color: #0369a1; font-size: 12px; font-weight: bold;">
+                                                        VOL ALLER</p>
+                                                    <p style="margin: 0; color: #1f2937; font-size: 14px;">
+                                                        <strong>{$VOL_ALLER_NUMERO}</strong>
+                                                    </p>
+                                                    <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 13px;">
+                                                        Départ: ${VOL_ALLER_VILLE_DEPART}</p>
+                                                    <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 13px;">
+                                                        Arrivée: ${VOL_ALLER_VILLE_ARRIVEE}</p>
+                                                    <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 13px;">Heure
+                                                        Départ: ${VOL_ALLER_HEURE_DEPART}</p>
+                                                </td>
+                                                <td width="50%"
+                                                    style="vertical-align: top; border-left: 4px solid #0369a1; padding-left: 20px;">
+                                                    <p
+                                                        style="margin: 0 0 5px 0; color: #0369a1; font-size: 12px; font-weight: bold;">
+                                                        VOL RETOUR</p>
+                                                    <p style="margin: 0; color: #1f2937; font-size: 14px;">
+                                                        <strong>${VOL_RETOUR_NUMERO}</strong>
+                                                    </p>
+                                                    <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 13px;">
+                                                        Départ: ${VOL_RETOUR_VILLE_DEPART}</p>
+                                                    <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 13px;">
+                                                        Arrivée: ${VOL_RETOUR_VILLE_ARRIVEE}</p>
+                                                    <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 13px;">Heure
+                                                        Départ: ${VOL_RETOUR_HEURE_DEPART}</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Hôtel -->
+                            <h3
+                                style="margin: 30px 0 15px 0; color: #1f2937; font-size: 18px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                                Détails de l'hôtel
+                            </h3>
+
+                            <table width="100%" cellpadding="15" cellspacing="0" border="0"
+                                style="background-color: #faf5ff; border-radius: 8px; margin-bottom: 20px;">
+                                <tr>
+                                    <td>
+                                        <p
+                                            style="margin: 0 0 10px 0; color: #1f2937; font-size: 16px; font-weight: bold;">
+                                            ${HOTEL_NOM}: ${HOTEL_ETOILES} étoiles</p>
+                                        <p style="margin: 0 0 5px 0; color: #6b7280; font-size: 14px;">
+                                            ${HOTEL_ADRESSE}</p>
+                                        <p style="margin: 0 0 5px 0; color: #6b7280; font-size: 14px;">
+                                            ${HOTEL_TYPE_CHAMBRE}</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Récapitulatif prix -->
+                            <h3
+                                style="margin: 30px 0 15px 0; color: #1f2937; font-size: 18px; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px;">
+                                Récapitulatif des prix
+                            </h3>
+
+                            <table width="100%" cellpadding="10" cellspacing="0" border="0"
+                                style="margin-bottom: 20px;">
+                                <tr>
+                                    <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb;">
+                                        <p style="margin: 0; color: #6b7280; font-size: 14px;">Vol aller-retour</p>
+                                    </td>
+                                    <td style="padding: 10px 0; text-align: right; border-bottom: 1px solid #e5e7eb;">
+                                        <p style="margin: 0; color: #1f2937; font-size: 14px; font-weight: bold;">
+                                            ${PRIX_VOL}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb;">
+                                        <p style="margin: 0; color: #6b7280; font-size: 14px;">Hôtel (${NOMBRE_NUITS}
+                                            nuits)</p>
+                                    </td>
+                                    <td style="padding: 10px 0; text-align: right; border-bottom: 1px solid #e5e7eb;">
+                                        <p style="margin: 0; color: #1f2937; font-size: 14px; font-weight: bold;">
+                                            ${PRIX_HOTEL}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 15px 0; background-color: #f0fdf4; border-radius: 8px;">
+                                        <p style="margin: 0; color: #166534; font-size: 16px; font-weight: bold;">TOTAL
+                                            PAYÉ</p>
+                                    </td>
+                                    <td
+                                        style="padding: 15px 0; text-align: right; background-color: #f0fdf4; border-radius: 8px;">
+                                        <p style="margin: 0; color: #166534; font-size: 20px; font-weight: bold;">
+                                            ${PRIX_TOTAL}</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <!-- Informations importantes -->
+                    <tr>
+                        <td style="padding: 30px; background-color: #fef3c7; border-top: 3px solid #f59e0b;">
+                            <h3 style="margin: 0 0 15px 0; color: #92400e; font-size: 16px;">⚠️ Informations importantes
+                            </h3>
+                            <ul
+                                style="margin: 0; padding-left: 20px; color: #78350f; font-size: 14px; line-height: 1.8;">
+                                <li>Veuillez vous présenter à l'aéroport 3 heures avant le départ</li>
+                                <li>N'oubliez pas votre passeport et vos documents de voyage</li>
+                                <li>Conservez ce mail comme confirmation de votre réservation</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <!-- Besoin d'aide -->
+                    <tr>
+                        <td
+                            style="padding: 30px; background-color: #f9fafb; text-align: center; border-top: 1px solid #e5e7eb;">
+                            <h3 style="margin: 0 0 15px 0; color: #1f2937; font-size: 16px;">Besoin d'aide ?</h3>
+                            <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">Notre équipe est disponible
+                                24/7 pour vous assister</p>
+                            <p style="margin: 0; color: #667eea; font-size: 14px;">
+                                📧 <a href="mailto:contact@traveler.com"
+                                    style="color: #667eea; text-decoration: none; font-weight: bold;">contact@traveler.com</a>
+                                •
+                                📞 <span style="font-weight: bold;">+261 20 XX XXX XX</span>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding: 30px; background-color: #1f2937; text-align: center;">
+                            <p style="margin: 0 0 15px 0; color: #ffffff; font-size: 18px; font-weight: bold;"> Traveler
+                            </p>
+                            <p style="margin: 0 0 10px 0; color: #9ca3af; font-size: 13px;">Votre partenaire de
+                                confiance depuis toujours</p>
+                            <p style="margin: 0 0 15px 0; color: #9ca3af; font-size: 13px;">Plus de 4,000 voyageurs
+                                satisfaits • 150+ destinations</p>
+                            <p style="margin: 20px 0 0 0; color: #6b7280; font-size: 11px;">
+                                © 2024 Traveler. Tous droits réservés.<br>
+                                Fianarantsoa, Madagascar
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
